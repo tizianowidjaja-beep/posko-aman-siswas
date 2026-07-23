@@ -13,6 +13,7 @@
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; position: relative; padding: 40px 20px;
     }
     .container { position: relative; z-index: 2; width: 100%; max-width: 520px; }
+    
     form {
       background: #ffffff !important; border: 5px solid #000000 !important; border-radius: 32px !important;
       padding: 40px 30px !important; box-shadow: 12px 12px 0px #000000 !important; display: block !important;
@@ -35,11 +36,13 @@
     .badge-purple { background: #b185ff; color: black; }
     h2 { color: #000000; font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
     .subtitle { color: #334155; font-size: 14px; line-height: 1.5; margin-bottom: 30px; }
+    
     .input-card { margin-bottom: 24px; padding: 16px; border: 3px solid #000000; border-radius: 24px; box-shadow: 5px 5px 0px #000000; }
     .neon-pink { background: #ffb7b7; }
     .neon-yellow { background: #fffda2; }
     .neon-purple { background: #e2c6ff; }
     .neon-blue { background: #bceeff; }
+    
     label { display: block; color: #000000; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
     .required-text { color: #ef4444; font-size: 12px; background: #ffffff; padding: 2px 6px; border-radius: 6px; border: 1px solid #000000; margin-left: 4px; }
     input, textarea { width: 100%; background: #ffffff; border: 3px solid #000000; border-radius: 14px; padding: 12px 16px; color: #000000; font-size: 14px; font-weight: 600; }
@@ -47,27 +50,13 @@
     button[type="submit"] {
       width: 100%; background: #38ef7d !important; border: 4px solid #000000 !important; border-radius: 24px !important; padding: 18px !important; font-size: 18px !important; font-weight: 700 !important; cursor: pointer; box-shadow: 0px 8px 0px #000000 !important; transition: all 0.1s ease;
     }
-    .toast-notification {
-      position: fixed !important; top: -250px !important; right: 20px !important; background: #57cc99 !important; border: 4px solid #000000 !important; border-radius: 20px !important; padding: 16px 20px !important; display: flex !important; align-items: center !important; gap: 14px !important; box-shadow: 6px 6px 0px #000000 !important; z-index: 9999 !important; max-width: 350px !important; width: calc(100% - 40px) !important; transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    }
-    .toast-notification.tampil { top: 20px !important; }
-    .toast-icon { font-size: 32px; }
-    .toast-content h4 { color: #000000; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
-    .toast-content p { color: #000000; font-size: 13px; }
-    .toast-close { background: none; border: none; font-size: 18px; font-weight: 700; cursor: pointer; color: #000000; margin-left: auto; }
   </style>
 </head>
 <body>
 
-  <!-- FRAME PINTAR CADANGAN UNTUK MEMBUNGKUS DATA DIAM-DIAM -->
-  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessToast();}"></iframe>
-
   <div class="container">
-    <!-- 
-      Langkah 1: Ganti Tautan di Bawah Ini dengan Tautan Google Form Anda Sendiri! 
-      Pastikan tautannya diakhiri dengan tulisan "/formResponse" (Bukan "/viewform")
-    -->
-    <form id="formKekerasan" action="https://google.com" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+    <!-- Menggunakan Tautan Formspree Asal Anda -->
+    <form id="formKekerasan" action="https://formspree.io" method="POST">
       
       <div class="maskot-container">
         <img src="https://googleusercontent.com" class="maskot-img" alt="AS-Man">
@@ -91,73 +80,39 @@
       <h2>Aduan Bullying Sekolah 🛡️</h2>
       <p class="subtitle">Laporan khusus perundungan oleh oknum guru atau siswa.</p>
       
-      <!-- 
-        Langkah 2: Ganti Atribut name="" di bawah (Contoh: name="entry.1234567") 
-        Sesuaikan dengan Kode entry ID dari salinan link Google Form Anda!
-      -->
       <div class="input-card neon-pink">
         <label>🏫 Asal Sekolah</label>
-        <input type="text" name="entry.111111111" required placeholder="Contoh: SMAN 1 Jember">
+        <input type="text" name="Asal Sekolah" required placeholder="Contoh: SMAN 1 Jember">
       </div>
 
       <div class="input-card neon-yellow">
         <label>👤 Nama Lengkap Pelapor <span class="required-text">Wajib Diisi</span></label>
-        <input type="text" name="entry.222222222" required placeholder="Tulis nama lengkap Anda sesuai absen">
+        <input type="text" name="Nama Pelapor" required placeholder="Tulis nama lengkap Anda sesuai absen">
       </div>
 
       <div class="input-card neon-purple">
         <label>🎯 Siapa Pelaku / Oknumnya?</label>
-        <input type="text" name="entry.333333333" required placeholder="Contoh: Oknum Guru X / Siswa Kelas 12 B">
+        <input type="text" name="Nama Pelaku" required placeholder="Contoh: Oknum Guru X / Siswa Kelas 12 B">
       </div>
       
       <div class="input-card neon-blue">
         <label>📝 Cerita Kronologi Kejadian</label>
-        <textarea name="entry.444444444" rows="4" required placeholder="Ceritakan kronologi secara jelas..."></textarea>
+        <textarea name="Kronologi" rows="4" required placeholder="Ceritakan kronologi secara jelas..."></textarea>
       </div>
       
       <button type="submit" id="btnSubmit">
         <span>Kirim Laporan Resmi! 🚀</span>
       </button>
-    </form>
-  </div>
-
-  <div id="notifToast" class="toast-notification">
-    <div class="toast-icon">🎉</div>
-    <div class="toast-content">
-      <h4>Laporan Terkirim!</h4>
-      <p>Data dikunci di folder enkripsi developer. Stay safe! 💖</p>
-    </div>
-    <button type="button" onclick="tutupNotif()" class="toast-close">✕</button>
+    </form> <!-- Tag penutup ditaruh di sini agar membungkus semua kolom dengan benar -->
   </div>
 
   <script>
-    let submitted = false;
-
-    // Logika animasi tombol saat memproses pengiriman data rahasia
+    // Membiarkan browser mengirimkan data secara alami tanpa skrip interupsi Fetch yang memicu eror jaringan
     document.getElementById('formKekerasan').addEventListener('submit', function() {
       const submitBtn = document.getElementById('btnSubmit');
       submitBtn.querySelector('span').innerText = 'Mengunci data rahasiamu... 🔒';
       submitBtn.style.pointerEvents = 'none';
     });
-
-    // Langkah 3: Eksekusi kemunculan pop-up hijau bawaan saat data sukses terkirim diam-diam
-    function showSuccessToast() {
-      const notif = document.getElementById('notifToast');
-      const submitBtn = document.getElementById('btnSubmit');
-      const form = document.getElementById('formKekerasan');
-      
-      notif.classList.add('tampil');
-      form.reset(); // Bersihkan formulir kembali kosong
-      
-      submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
-      submitBtn.style.pointerEvents = 'auto';
-      
-      setTimeout(function() { tutupNotif(); }, 5000);
-    }
-
-    function tutupNotif() {
-      document.getElementById('notifToast').classList.remove('tampil');
-    }
   </script>
 </body>
 </html>
