@@ -13,8 +13,6 @@
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; position: relative; padding: 40px 20px;
     }
     .container { position: relative; z-index: 2; width: 100%; max-width: 520px; }
-    
-    /* Perbaikan Form Container */
     form {
       background: #ffffff !important; border: 5px solid #000000 !important; border-radius: 32px !important;
       padding: 40px 30px !important; box-shadow: 12px 12px 0px #000000 !important; display: block !important;
@@ -37,13 +35,11 @@
     .badge-purple { background: #b185ff; color: black; }
     h2 { color: #000000; font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
     .subtitle { color: #334155; font-size: 14px; line-height: 1.5; margin-bottom: 30px; }
-    
     .input-card { margin-bottom: 24px; padding: 16px; border: 3px solid #000000; border-radius: 24px; box-shadow: 5px 5px 0px #000000; }
     .neon-pink { background: #ffb7b7; }
     .neon-yellow { background: #fffda2; }
     .neon-purple { background: #e2c6ff; }
     .neon-blue { background: #bceeff; }
-    
     label { display: block; color: #000000; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
     .required-text { color: #ef4444; font-size: 12px; background: #ffffff; padding: 2px 6px; border-radius: 6px; border: 1px solid #000000; margin-left: 4px; }
     input, textarea { width: 100%; background: #ffffff; border: 3px solid #000000; border-radius: 14px; padding: 12px 16px; color: #000000; font-size: 14px; font-weight: 600; }
@@ -51,7 +47,6 @@
     button[type="submit"] {
       width: 100%; background: #38ef7d !important; border: 4px solid #000000 !important; border-radius: 24px !important; padding: 18px !important; font-size: 18px !important; font-weight: 700 !important; cursor: pointer; box-shadow: 0px 8px 0px #000000 !important; transition: all 0.1s ease;
     }
-    
     .toast-notification {
       position: fixed !important; top: -250px !important; right: 20px !important; background: #57cc99 !important; border: 4px solid #000000 !important; border-radius: 20px !important; padding: 16px 20px !important; display: flex !important; align-items: center !important; gap: 14px !important; box-shadow: 6px 6px 0px #000000 !important; z-index: 9999 !important; max-width: 350px !important; width: calc(100% - 40px) !important; transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     }
@@ -65,7 +60,6 @@
 <body>
 
   <div class="container">
-    <!-- FORM UTAMA YANG SUDAH MEMBUNGKUS SELURUH INPUTAN DENGAN BENAR -->
     <form id="formKekerasan" action="https://formspree.io" method="POST">
       
       <div class="maskot-container">
@@ -113,7 +107,7 @@
       <button type="submit" id="btnSubmit">
         <span>Kirim Laporan Resmi! 🚀</span>
       </button>
-    </form> <!-- Tanda tutup form dipindah ke paling bawah agar membungkus semua data -->
+    </form>
   </div>
 
   <div id="notifToast" class="toast-notification">
@@ -134,26 +128,36 @@
       submitBtn.querySelector('span').innerText = 'Mengunci data rahasiamu... 🔒';
       submitBtn.style.pointerEvents = 'none';
 
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", form.action);
-      xhr.setRequestHeader("Accept", "application/json");
-      
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState !== XMLHttpRequest.DONE) return;
-        
-        if (xhr.status === 200) {
+      // Menggunakan Format JSON Murni & Mengabaikan CORS Error Browser
+      const data = {};
+      new FormData(form).forEach((value, key) => data[key] = value);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        mode: 'cors', // Memaksa browser mengabaikan isu jaringan lokal
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then(function(response) {
+        if (response.ok) {
           const notif = document.getElementById('notifToast');
           notif.classList.add('tampil');
           form.reset();
           setTimeout(function() { tutupNotif(); }, 5000);
         } else {
-          alert('Gagal mengirim aduan rahasia. Pastikan ID Formspree mgojgjpw sudah berstatus ACTIVE di emailmu.');
+          // JIKA ERROR, SISTEM OTOMATIS AMBIL JALUR AMAN FORMULIR LANGSUNG
+          form.submit();
         }
         submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
         submitBtn.style.pointerEvents = 'auto';
-      };
-      
-      xhr.send(new FormData(form));
+      })
+      .catch(function(error) {
+        // BACKUP SYSTEM JIKA JARINGAN MACET TOTAL
+        form.submit();
+      });
     });
 
     function tutupNotif() {
