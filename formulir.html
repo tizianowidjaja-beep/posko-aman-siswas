@@ -59,8 +59,12 @@
 </head>
 <body>
 
+  <!-- JALUR RAW PENYELAMAT: Mengurung respons halaman sukses Formspree di sini secara paksa -->
+  <iframe name="target_iframe_rahasia" id="target_iframe_rahasia" style="display:none;" onload="if(kirimSukses) { eksekusiNotifSukses(); }"></iframe>
+
   <div class="container">
-    <form id="formKekerasan" action="https://formspree.io" method="POST">
+    <!-- Menggunakan Form asli Anda, tetapi targetnya dialihkan ke Iframe tersembunyi di atas -->
+    <form id="formKekerasan" action="https://formspree.io" method="POST" target="target_iframe_rahasia" onsubmit="kirimSukses=true;">
       
       <div class="maskot-container">
         <img src="https://googleusercontent.com" class="maskot-img" alt="AS-Man">
@@ -120,42 +124,30 @@
   </div>
 
   <script>
-    document.getElementById('formKekerasan').addEventListener('submit', function(e) {
-      e.preventDefault(); // KUNCI UTAMA: Blokir total pemindahan halaman eksternal!
-      
-      const form = e.target;
+    let kirimSukses = false;
+
+    // Mengubah teks animasi tombol saat pengguna mengklik kirim
+    document.getElementById('formKekerasan').addEventListener('submit', function() {
       const submitBtn = document.getElementById('btnSubmit');
       submitBtn.querySelector('span').innerText = 'Mengunci data rahasiamu... 🔒';
       submitBtn.style.pointerEvents = 'none';
-
-      // Mengubah seluruh data form menjadi objek JSON murni agar Formspree tidak bingung mengembalikan halaman URL
-      const data = {};
-      const formData = new FormData(form);
-      formData.forEach((value, key) => { data[key] = value });
-
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", form.action, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.setRequestHeader("Accept", "application/json");
-      
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            // BERHASIL TOTAL! Pengguna tetap di aduansekolah.com & notif hijau menyembul keluar
-            const notif = document.getElementById('notifToast');
-            notif.classList.add('tampil');
-            form.reset();
-            setTimeout(function() { tutupNotif(); }, 5000);
-          } else {
-            alert('Aktivasi Diperlukan: Pastikan ID Formspree mgojgjpw sudah Anda konfirmasi lewat kotak masuk Email Anda.');
-          }
-          submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
-          submitBtn.style.pointerEvents = 'auto';
-        }
-      };
-      
-      xhr.send(JSON.stringify(data)); // Kirim paket data JSON senyap di latar belakang
     });
+
+    // Fungsi otomatis memicu kemunculan pop-up hijau di halaman Anda tanpa pindah tautan URL
+    function eksekusiNotifSukses() {
+      const notif = document.getElementById('notifToast');
+      const submitBtn = document.getElementById('btnSubmit');
+      const form = document.getElementById('formKekerasan');
+      
+      notif.classList.add('tampil');
+      form.reset(); // Mengosongkan form kembali
+      
+      submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
+      submitBtn.style.pointerEvents = 'auto';
+      kirimSukses = false; // Reset status pelacakan
+      
+      setTimeout(function() { tutupNotif(); }, 5000);
+    }
 
     function tutupNotif() {
       document.getElementById('notifToast').classList.remove('tampil');
