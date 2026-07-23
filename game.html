@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AS-Man Stress Buster Pocket ⌁</title>
+  <style>
+    @import url('https://googleapis.com');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Fredoka', sans-serif; }
+
+    body {
+      background-color: #ff6b6b; 
+      background-image: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 20px, #ff8787 20px, #ff8787 40px); 
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
+    }
+
+    .redeem-top-bar {
+      width: 100%; max-width: 520px; background: #ffff00; border: 4px solid #000000;
+      border-radius: 16px; padding: 12px; margin-bottom: 15px; box-shadow: 6px 6px 0px #000000;
+      text-align: center; font-size: 14px; font-weight: bold; z-index: 10;
+    }
+    .status-unlocked { color: #008000; }
+
+    .gameboy-body {
+      background: #ffbe0b; border: 6px solid #000000; border-radius: 36px;
+      padding: 25px; box-shadow: 12px 12px 0px #fb5607; text-align: center; width: 100%; max-width: 520px;
+    }
+    .gameboy-title { color: #000; font-size: 22px; font-weight: 900; margin-bottom: 12px; text-transform: uppercase; letter-spacing: -0.5px; }
+    
+    .gameboy-screen {
+      background: #90be6d; border: 5px solid #000000; border-radius: 20px;
+      padding: 15px; min-height: 250px; display: flex; flex-direction: column; 
+      justify-content: space-between; align-items: center; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.2);
+    }
+    .gameboy-avatar-frame { position: relative; width: 90px; height: 90px; }
+    .gameboy-avatar {
+      width: 100%; height: 100%; border-radius: 50%; border: 3px solid #000; object-fit: cover; background: #fff;
+    }
+    .gameboy-speech { font-size: 13px; color: #000; font-weight: 700; background: #fff; border: 2px solid #000; padding: 6px 10px; border-radius: 10px; line-height: 1.3; max-width: 95%; box-shadow: 3px 3px 0px #000; }
+    
+    .target-monster {
+      background: #f94144; color: #fff; padding: 6px 14px; border: 3px solid #000;
+      border-radius: 12px; font-weight: 800; font-size: 13px; display: inline-block; box-shadow: 3px 3px 0px #000;
+    }
+    .target-monster.hit { animation: squash 0.15s ease-out; background: #ffff00; color: #000; }
+    @keyframes squash { 0% { transform: scale(1); } 50% { transform: scale(1.25) translateY(-5px); } 100% { transform: scale(1); } }
+
+    .gameboy-buttons-layout { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding: 0 10px; }
+    .action-buttons { display: flex; gap: 12px; }
+    .btn-round {
+      width: 52px; height: 52px; background: #ff0055; border: 4px solid #000; border-radius: 50%;
+      color: #fff; font-weight: 900; font-size: 16px; cursor: pointer; box-shadow: 0px 4px 0px #000;
+    }
+    .btn-round:active { transform: translateY(3px); box-shadow: 0px 1px 0px #000; }
+    
+    .console-input-box { width: 100%; margin-top: 15px; }
+    .console-text-field {
+      width: 100%; background: #fff; border: 3px solid #000; border-radius: 14px;
+      padding: 10px 14px; font-size: 14px; font-weight: 700; text-align: center; box-shadow: 4px 4px 0px #000;
+    }
+
+    .btn-gate-open {
+      width: 100%; background: #38ef7d; color: #000; border: 4px solid #000; border-radius: 20px;
+      padding: 15px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0px 6px 0px #000;
+      margin-top: 20px; display: none; animation: pulseBtn 1s infinite alternate;
+    }
+    @keyframes pulseBtn { from { transform: scale(1); } to { transform: scale(1.02); } }
+
+    .dpad { position: relative; width: 60px; height: 60px; }
+    .dpad-horizontal, .dpad-vertical { background: #000; position: absolute; border-radius: 4px; }
+    .dpad-horizontal { width: 60px; height: 20px; top: 20px; left: 0; }
+    .dpad-vertical { width: 20px; height: 60px; top: 0; left: 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="redeem-top-bar">
+    🔑 STATUS AKSES: <span class="status-unlocked">TERBUKA (Event Ketok Mejik Studio) 🎉</span>
+  </div>
+
+  <div class="gameboy-body">
+    <div class="gameboy-title">🎮 STRESS BUSTER POCKET</div>
+    
+    <div class="gameboy-screen">
+      <div class="gameboy-avatar-frame">
+        <img src="https://googleusercontent.com" class="gameboy-avatar" alt="AS-Man">
+      </div>
+      <div id="gameSpeech" class="gameboy-speech">"Ketik beban pikiranmu di bawah, lalu hantam tombol B-BLAST!"</div>
+      <div>
+        <div class="target-monster" id="targetObject">🎯 BEBAN STRES</div>
+      </div>
+    </div>
+
+    <div class="console-input-box">
+      <input type="text" id="stressInput" class="console-text-field" placeholder="Tulis masalah / nama oknum...">
+    </div>
+
+    <div class="gameboy-buttons-layout">
+      <div class="dpad">
+        <div class="dpad-horizontal"></div>
+        <div class="dpad-vertical"></div>
+      </div>
+      <div class="action-buttons">
+        <button type="button" class="btn-round" onclick="alert('Tekan B untuk menghantam laser!')" style="background:#4b5563;">A</button>
+        <button type="button" class="btn-round" onclick="fireLaserCannon()">B</button>
+      </div>
+    </div>
+
+    <button type="button" id="nextPageBtn" class="btn-gate-open" onclick="goToFormPage()">
+      LANJUT KE FORMULIR ADUAN RESMI 🚀
+    </button>
+  </div>
+
+  <script>
+    let hitCount = 0;
+    function fireLaserCannon() {
+      const txtInput = document.getElementById('stressInput').value.trim();
+      const dummy = document.getElementById('targetObject');
+      const speech = document.getElementById('gameSpeech');
+      const nextBtn = document.getElementById('nextPageBtn');
+      
+      if(txtInput === "") {
+        alert("Ketik hal yang bikin kamu stres di kolom putih dulu!");
+        return;
+      }
+
+      dummy.innerText = "💥 " + txtInput.toUpperCase();
+      dummy.classList.add('hit');
+      hitCount++;
+
+      if(hitCount === 1) speech.innerText = '"Bagus! Bidik targetnya lagi, hancurkan!" 🦾';
+      if(hitCount === 3) speech.innerText = '"Laser AS-Man terkunci! Sedikit lagi!" 🔥';
+      if(hitCount >= 5) {
+        speech.innerText = '"BOOM! Target lenyap! Akses tombol rahasia di bawah kini aktif!" 🏆';
+        dummy.innerText = "💀 DESTROYED";
+        document.getElementById('stressInput').value = "";
+        nextBtn.style.display = "block"; 
+        hitCount = 0;
+      }
+
+      setTimeout(() => { dummy.classList.remove('hit'); }, 150);
+    }
+
+    function goToFormPage() {
+      window.location.href = "formulir.html";
+    }
+  </script>
+</body>
+</html>
