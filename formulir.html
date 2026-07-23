@@ -59,20 +59,12 @@
     button[type="submit"] {
       width: 100%; background: #38ef7d !important; border: 4px solid #000000 !important; border-radius: 24px !important; padding: 18px !important; font-size: 18px !important; font-weight: 700 !important; cursor: pointer; box-shadow: 0px 8px 0px #000000 !important; transition: all 0.1s ease;
     }
-
-    .toast-notification {
-      position: fixed !important; top: -250px !important; right: 20px !important; background: #57cc99 !important; border: 4px solid #000000 !important; border-radius: 20px !important; padding: 16px 20px !important; display: flex !important; align-items: center !important; gap: 14px !important; box-shadow: 6px 6px 0px #000000 !important; z-index: 9999 !important; max-width: 350px !important; width: calc(100% - 40px) !important; transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    }
-    .toast-notification.tampil { top: 20px !important; }
-    .toast-icon { font-size: 32px; }
-    .toast-content h4 { color: #000000; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
-    .toast-content p { color: #000000; font-size: 13px; }
-    .toast-close { background: none; border: none; font-size: 18px; font-weight: 700; cursor: pointer; color: #000000; margin-left: auto; }
   </style>
 </head>
 <body>
 
   <div class="container">
+    <!-- Formspree Utama -->
     <form id="formKekerasan" action="https://formspree.io" method="POST">
       
       <div class="maskot-container">
@@ -123,52 +115,14 @@
     </form>
   </div>
 
-  <div id="notifToast" class="toast-notification">
-    <div class="toast-icon">🎉</div>
-    <div class="toast-content">
-      <h4>Laporan Terkirim!</h4>
-      <p>Data dikunci di folder enkripsi developer. Stay safe! 💖</p>
-    </div>
-    <button type="button" onclick="tutupNotif()" class="toast-close">✕</button>
-  </div>
-
+  <!-- KODE JAVASCRIPT CARA 1 YANG SUDAH DIPERBAIKI -->
   <script>
-    document.getElementById('formKekerasan').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
+    document.getElementById('formKekerasan').addEventListener('submit', function() {
       const submitBtn = document.getElementById('btnSubmit');
-      
       submitBtn.querySelector('span').innerText = 'Mengunci data rahasiamu... 🔒';
       submitBtn.style.pointerEvents = 'none';
-      
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(response) {
-        if (response.ok) {
-          const notif = document.getElementById('notifToast');
-          notif.classList.add('tampil');
-          form.reset(); 
-          setTimeout(function() { tutupNotif(); }, 5000);
-        } else {
-          alert('Sistem sibuk, coba kirim ulang.');
-        }
-        submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
-        submitBtn.style.pointerEvents = 'auto';
-      })
-      .catch(function(error) {
-        alert('Gangguan jaringan.');
-        submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
-        submitBtn.style.pointerEvents = 'auto';
-      });
+      // Data sekarang langsung dikirim oleh sistem peramban secara aman tanpa interupsi robotik
     });
-
-    function tutupNotif() {
-      document.getElementById('notifToast').classList.remove('tampil');
-    }
   </script>
 </body>
 </html>
