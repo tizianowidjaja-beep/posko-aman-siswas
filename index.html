@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Akses Posko Aman 🎟️</title>
+  <style>
+    @import url('https://googleapis.com');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Fredoka', sans-serif; }
+
+    body {
+      background-color: #ff6b6b; 
+      background-image: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 20px, #ff8787 20px, #ff8787 40px); 
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
+    }
+
+    .redeem-top-bar {
+      width: 100%; max-width: 450px; background: #ffff00; border: 4px solid #000000;
+      border-radius: 16px; padding: 12px; margin-bottom: 20px; box-shadow: 6px 6px 0px #000000;
+      text-align: center; font-size: 14px; font-weight: bold;
+    }
+    .status-locked { color: #ff0000; animation: pulseText 1s infinite alternate; }
+    @keyframes pulseText { from { opacity: 1; } to { opacity: 0.5; } }
+
+    .redeem-box {
+      background: #ffffff; border: 5px solid #000000; border-radius: 32px;
+      padding: 40px 25px; box-shadow: 12px 12px 0px #00ffff; text-align: center;
+      max-width: 450px; width: 100%;
+    }
+    .redeem-box h2 { font-size: 26px; margin-bottom: 12px; color: #000; }
+    .redeem-box p { font-size: 14px; margin-bottom: 25px; color: #334155; line-height: 1.5; }
+    .redeem-box .studio-tag { background: #000; color: #fff; padding: 3px 10px; border-radius: 8px; font-weight: bold; }
+    
+    .redeem-input {
+      width: 100%; background: #fff; border: 4px solid #000; border-radius: 16px;
+      padding: 15px; font-size: 16px; font-weight: 700; text-align: center; letter-spacing: 1px; margin-bottom: 15px;
+    }
+    .redeem-input:focus { outline: none; background: #fffda2; }
+    
+    .btn-verify {
+      width: 100%; background: #ffff00; color: #000; border: 4px solid #000;
+      border-radius: 16px; padding: 14px; font-size: 16px; font-weight: 700;
+      cursor: pointer; box-shadow: 0px 5px 0px #000;
+    }
+    .btn-verify:active { transform: translateY(3px); box-shadow: 0px 2px 0px #000; }
+    .error-msg { color: #ef4444; font-size: 13px; font-weight: bold; margin-top: 12px; display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="redeem-top-bar">
+    🔑 STATUS AKSES WEBSITE: <span class="status-locked">TERKUNCI (Wajib Kode Redeem)</span>
+  </div>
+
+  <div class="redeem-box">
+    <h2>🎟️ VERIFIKASI AKSES POSKO</h2>
+    <p>Halaman ini sedang berada dalam masa Event Terbatas <span class="studio-tag">Ketok Mejik Studio</span>! Masukkan Kode Redeem dari TikTok/YouTube untuk mendobrak pintu sistem!</p>
+    
+    <input type="text" id="redeemInputCode" class="redeem-input" placeholder="Masukkan kode redeem...">
+    <div id="redeemError" class="error-msg">⚠️ KODE REDEEM SALAH! Akses ditolak sistem radar.</div>
+    <br>
+    <button type="button" class="btn-verify" onclick="checkRedeemCode()">BUKA KUNCI WEBSITE 🔓</button>
+  </div>
+
+  <script>
+    // Data Kode Redeem Rahasia Toko
+    const KODE_RAHASIA = '50VIewsBERKAh")';
+
+    function checkRedeemCode() {
+      const inputVal = document.getElementById('redeemInputCode').value;
+      const errorText = document.getElementById('redeemError');
+
+      if (inputVal === KODE_RAHASIA) {
+        alert('🔓 ACCESS GRANTED! Mengalihkan ke Halaman Utama Season 1...');
+        // Berpindah otomatis ke halaman dashboard utama
+        window.location.href = "dashboard.html";
+      } else {
+        errorText.style.display = 'block';
+        document.getElementById('redeemInputCode').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AS-Man Stress Buster - Season 1 ⚡</title>
+  <style>
+    @import url('https://googleapis.com');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Fredoka', sans-serif; }
+
+    body {
+      background-color: #ff6b6b !important; 
+      background-image: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 20px, #ff8787 20px, #ff8787 40px) !important; 
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; position: relative; padding: 40px 20px;
+    }
+
+    .redeem-top-bar {
+      width: 100%; max-width: 520px; background: #ffff00; border: 4px solid #000000;
+      border-radius: 16px; padding: 12px; margin-bottom: 15px; box-shadow: 6px 6px 0px #000000;
+      text-align: center; font-size: 14px; font-weight: bold; z-index: 10;
+    }
+    .status-unlocked { color: #008000; }
+
+    .sparkle { position: absolute; font-size: 40px; z-index: 1; animation: floatEffect 4s ease-in-out infinite alternate; }
+    .sparkle-1 { top: 5%; left: 8%; }
+    .sparkle-2 { top: 35%; right: 5%; font-size: 50px; animation-delay: 1s; }
+    .sparkle-3 { bottom: 5%; left: 5%; animation-delay: 2s; }
+
+    @keyframes floatEffect { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-20px) rotate(15deg); } }
+
+    /* ========================================== */
+    /* KARTU RETRO GAME PENGUSIR STRES             */
+    /* ========================================== */
+    .game-card {
+      background: #101827 !important; color: #ffffff; border: 5px solid #000000;
+      border-radius: 32px; padding: 25px; margin-bottom: 25px; box-shadow: 8px 8px 0px #00ffff;
+      text-align: center; width: 100%; max-width: 520px; z-index: 2;
+    }
+    .game-card h3 { color: #00ffff; font-size: 20px; margin-bottom: 5px; }
+    .game-card p { font-size: 13px; color: #9ca3af; margin-bottom: 15px; }
+    
+    .game-container {
+      background: #1f2937; border: 3px solid #000; border-radius: 16px;
+      padding: 15px; position: relative; overflow: hidden; min-height: 180px;
+      display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    }
+    
+    .target-dummy {
+      background: #ff4747; color: #fff; padding: 8px 16px; border: 3px solid #000;
+      border-radius: 12px; font-weight: bold; font-size: 14px; display: inline-block;
+      box-shadow: 4px 4px 0px #000; transition: all 0.1s ease;
+    }
+    .target-dummy.hit { animation: blast 0.2s ease-out; background: #ffff00; color: #000; }
+    
+    @keyframes blast {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3) rotate(5deg); }
+      100% { transform: scale(1); }
+    }
+
+    .game-controls { width: 100%; display: flex; gap: 8px; margin-top: 15px; }
+    .game-input { flex: 1; background: #000; color: #00ffff; border: 2px solid #00ffff; border-radius: 10px; padding: 8px; font-size: 13px; }
+    .btn-laser { background: #00ffff; color: #000; border: 2px solid #000; font-weight: bold; padding: 0 15px; border-radius: 10px; cursor: pointer; }
+    
+    /* TOMBOL LANJUT KE FORM */
+    .btn-next-page {
+      width: 100%; background: #ffff00; color: #000; border: 4px solid #000;
+      border-radius: 20px; padding: 15px; font-size: 16px; font-weight: bold;
+      cursor: pointer; box-shadow: 0px 6px 0px #000; margin-top: 15px; display: none;
+      animation: pulseBtn 1s infinite alternate;
+    }
+    @keyframes pulseBtn { from { transform: scale(1); } to { transform: scale(1.02); } }
+  </style>
+</head>
+<body>
+
+  <div class="redeem-top-bar">
+    🔑 STATUS AKSES WEBSITE: <span class="status-unlocked">TERBUKA (Event Ketok Mejik Studio) 🎉</span>
+  </div>
+
+  <div class="sparkle sparkle-1">✨</div>
+  <div class="sparkle sparkle-2">🌈</div>
+  <div class="sparkle sparkle-3">⭐</div>
+
+  <!-- GAME AREA -->
+  <div class="game-card">
+    <h3>⚡ AS-MAN STRESS-BUSTER CANNON</h3>
+    <p>Ketik hal/nama oknum yang bikin kamu stres, lalu tembak sampai hancur!</p>
+    
+    <div class="game-container">
+      <div id="gameSpeech" style="font-size: 12px; color: #39ff14;">"Tulis beban pikiranmu di bawah, kawan!"</div>
+      <div>
+        <div class="target-dummy" id="targetObject">🎯 KEBEDALAN / STRES</div>
+      </div>
+      <div class="game-controls">
+        <input type="text" id="stressInput" class="game-input" placeholder="Tulis masalahmu di sini...">
+        <button type="button" class="btn-laser" onclick="fireLaserCannon()">TEMBAK! 💥</button>
+      </div>
+    </div>
+
+    <!-- Tombol Sakelar Rahasia yang Muncul Ketika Game Selesai -->
+    <button type="button" id="nextPageBtn" class="btn-next-page" onclick="goToFormPage()">
+      LANJUT ISI ADUAN RESMI 🚀
+    </button>
+  </div>
+
+  <script>
+    let hitCount = 0;
+    function fireLaserCannon() {
+      const txtInput = document.getElementById('stressInput').value.trim();
+      const dummy = document.getElementById('targetObject');
+      const speech = document.getElementById('gameSpeech');
+      const nextBtn = document.getElementById('nextPageBtn');
+      
+      if(txtInput === "") {
+        alert("Tulis dulu hal yang bikin kamu stres!");
+        return;
+      }
+
+      dummy.innerText = "💥 " + txtInput.toUpperCase();
+      dummy.classList.add('hit');
+      hitCount++;
+
+      if(hitCount === 1) speech.innerText = '"Bagus! Kurangi bar HP masalahmu!" 🦾';
+      if(hitCount === 3) speech.innerText = '"Tembak terus! Rasakan hantaman Laser AS-Man!" 🔥';
+      if(hitCount >= 5) {
+        speech.innerText = '"BOOM! Masalahmu hancur lebur! Sekarang mari laporkan mereka secara resmi!" 🏆';
+        dummy.innerText = "💀 HANCUR TOTAL";
+        document.getElementById('stressInput').value = "";
+        nextBtn.style.display = "block"; // Munculkan tombol navigasi form
+        hitCount = 0;
+      }
+
+      setTimeout(() => { dummy.classList.remove('hit'); }, 200);
+    }
+
+    function goToFormPage() {
+      window.location.href = "formulir.html";
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulir Resmi Aduan Sekolah 🛡️</title>
+  <style>
+    @import url('https://googleapis.com');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Fredoka', sans-serif; }
+
+    body {
+      background-color: #ff6b6b !important; 
+      background-image: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 20px, #ff8787 20px, #ff8787 40px) !important; 
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; position: relative; padding: 40px 20px;
+    }
+
+    .sparkle { position: absolute; font-size: 40px; z-index: 1; animation: floatEffect 4s ease-in-out infinite alternate; }
+    .sparkle-1 { top: 5%; left: 8%; }
+    .sparkle-2 { top: 35%; right: 5%; font-size: 50px; animation-delay: 1s; }
+    .sparkle-3 { bottom: 5%; left: 5%; animation-delay: 2s; }
+
+    @keyframes floatEffect { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-20px) rotate(15deg); } }
+    .container { position: relative; z-index: 2; width: 100%; max-width: 520px; }
+
+    form {
+      background: #ffffff !important; border: 5px solid #000000 !important; border-radius: 32px !important;
+      padding: 40px 30px !important; box-shadow: 12px 12px 0px #000000 !important; display: block !important;
+    }
+
+    /* MASKOT SUPERHERO AS-MAN */
+    .maskot-container { text-align: center; margin-bottom: 20px; }
+    .maskot-img {
+      width: 130px; height: 130px; border-radius: 50%; border: 4px solid #000000;
+      box-shadow: 5px 5px 0px #00ffff; object-fit: cover; background: #fff;
+    }
+
+    .law-card {
+      background: #ff4747 !important; color: #ffffff !important; border: 4px solid #000000;
+      border-radius: 20px; padding: 20px; margin-bottom: 25px; box-shadow: 5px 5px 0px #000000;
+    }
+    .law-card h3 { font-size: 18px; margin-bottom: 10px; background: #000000; color: #ffde4d; display: inline-block; padding: 4px 10px; border-radius: 8px; }
+    .law-card p, .law-card ul { font-size: 13px; line-height: 1.5; font-weight: 500; }
+    .law-card ul { margin-top: 8px; padding-left: 18px; }
+
+    .badge-container { display: flex; gap: 8px; margin-bottom: 16px; }
+    .badge { padding: 6px 14px; border-radius: 40px; font-size: 12px; font-weight: 700; border: 3px solid #000000; box-shadow: 3px 3px 0px #000000; }
+    .badge-red { background: #ff4747; color: white; }
+    .badge-purple { background: #b185ff; color: black; }
+
+    h2 { color: #000000; font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .subtitle { color: #334155; font-size: 14px; line-height: 1.5; margin-bottom: 30px; }
+
+    .input-card { margin-bottom: 24px; padding: 16px; border: 3px solid #000000; border-radius: 24px; box-shadow: 5px 5px 0px #000000; }
+    .neon-pink { background: #ffb7b7; }
+    .neon-yellow { background: #fffda2; }
+    .neon-purple { background: #e2c6ff; }
+    .neon-blue { background: #bceeff; }
+
+    label { display: block; color: #000000; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .required-text { color: #ef4444; font-size: 12px; background: #ffffff; padding: 2px 6px; border-radius: 6px; border: 1px solid #000000; margin-left: 4px; }
+
+    input, textarea { width: 100%; background: #ffffff; border: 3px solid #000000; border-radius: 14px; padding: 12px 16px; color: #000000; font-size: 14px; font-weight: 600; }
+    textarea { resize: none; }
+
+    button[type="submit"] {
+      width: 100%; background: #38ef7d !important; border: 4px solid #000000 !important; border-radius: 24px !important; padding: 18px !important; font-size: 18px !important; font-weight: 700 !important; cursor: pointer; box-shadow: 0px 8px 0px #000000 !important; transition: all 0.1s ease;
+    }
+
+    .toast-notification {
+      position: fixed !important; top: -250px !important; right: 20px !important; background: #57cc99 !important; border: 4px solid #000000 !important; border-radius: 20px !important; padding: 16px 20px !important; display: flex !important; align-items: center !important; gap: 14px !important; box-shadow: 6px 6px 0px #000000 !important; z-index: 9999 !important; max-width: 350px !important; width: calc(100% - 40px) !important; transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+    .toast-notification.tampil { top: 20px !important; }
+    .toast-icon { font-size: 32px; }
+    .toast-content h4 { color: #000000; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+    .toast-content p { color: #000000; font-size: 13px; }
+    .toast-close { background: none; border: none; font-size: 18px; font-weight: 700; cursor: pointer; color: #000000; margin-left: auto; }
+  </style>
+</head>
+<body>
+
+  <div class="sparkle sparkle-1">✨</div>
+  <div class="sparkle sparkle-2">🌈</div>
+  <div class="sparkle sparkle-3">⭐</div>
+
+  <!-- FORMULIR UTAMA -->
+  <div class="container">
+    <form id="formKekerasan" action="https://formspree.io" method="POST">
+      
+      <!-- LOGO MASKOT SUPERHERO AS-MAN SEASON 1 -->
+      <div class="maskot-container">
+        <img src="https://googleusercontent.com" class="maskot-img" alt="AS-Man Superhero Maskot">
+        <div style="font-size: 12px; font-weight: bold; margin-top: 5px; color: #000;">SEASON 1: AS-MAN ACTIVE 🦾</div>
+      </div>
+
+      <div class="law-card">
+        <h3>⚠️ HUKUMAN PIDANA PERUNDUNGAN</h3>
+        <p>Berdasarkan <b>Pasal 76C jo. Pasal 80 ayat (1) UU No. 35 Tahun 2014</b>, setiap oknum yang terbukti melakukan kekerasan atau perundungan terhadap anak di sekolah diancam dengan hukuman:</p>
+        <ul>
+          <li><b>Pidana Penjara:</b> Maksimal 3 Tahun 6 Bulan</li>
+          <li><b>Denda Material:</b> Maksimal Rp 72.000.000</li>
+        </ul>
+      </div>
+
+      <div class="badge-container">
+        <span class="badge badge-red">POSKO DARURAT 🚨</span>
+        <span class="badge badge-purple">WAJIB IDENTITAS 📋</span>
+      </div>
+      
+      <h2>Aduan Bullying Sekolah 🛡️</h2>
+      <p class="subtitle">Laporan khusus perundungan oleh oknum guru atau siswa.</p>
+      
+      <div class="input-card neon-pink">
+        <label>🏫 Asal Sekolah</label>
+        <input type="text" name="Asal Sekolah" required placeholder="Contoh: SMAN 1 Jember">
+      </div>
+
+      <div class="input-card neon-yellow">
+        <label>👤 Nama Lengkap Pelapor <span class="required-text">Wajib Diisi</span></label>
+        <input type="text" name="Nama Pelapor" required placeholder="Tulis nama lengkap Anda sesuai absen">
+      </div>
+
+      <div class="input-card neon-purple">
+        <label>🎯 Siapa Pelaku / Oknumnya?</label>
+        <input type="text" name="Nama Pelaku" required placeholder="Contoh: Oknum Guru X / Siswa Kelas 12 B">
+      </div>
+      
+      <div class="input-card neon-blue">
+        <label>📝 Cerita Kronologi Kejadian</label>
+        <textarea name="Kronologi" rows="4" required placeholder="Ceritakan kronologi secara jelas..."></textarea>
+      </div>
+      
+      <button type="submit" id="btnSubmit">
+        <span>Kirim Laporan Resmi! 🚀</span>
+      </button>
+    </form>
+  </div>
+
+  <div id="notifToast" class="toast-notification">
+    <div class="toast-icon">🎉</div>
+    <div class="toast-content">
+      <h4>Laporan Terkirim!</h4>
+      <p>Data dikunci di folder enkripsi developer. Stay safe! 💖</p>
+    </div>
+    <button type="button" onclick="tutupNotif()" class="toast-close">✕</button>
+  </div>
+
+  <script>
+    // FORM SUBMIT ASLI
+    document.getElementById('formKekerasan').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const submitBtn = document.getElementById('btnSubmit');
+      
+      submitBtn.querySelector('span').innerText = 'Mengunci data rahasiamu... 🔒';
+      submitBtn.style.pointerEvents = 'none';
+      
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response) {
+        if (response.ok) {
+          const notif = document.getElementById('notifToast');
+          notif.classList.add('tampil');
+          form.reset(); 
+          setTimeout(function() { tutupNotif(); }, 5000);
+        } else {
+          alert('Sistem sibuk, coba kirim ulang.');
+        }
+        submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
+        submitBtn.style.pointerEvents = 'auto';
+      })
+      .catch(function(error) {
+        alert('Gangguan jaringan.');
+        submitBtn.querySelector('span').innerText = 'Kirim Laporan Resmi! 🚀';
+        submitBtn.style.pointerEvents = 'auto';
+      });
+    });
+
+    function tutupNotif() {
+      document.getElementById('notifToast').classList.remove('tampil');
+    }
+  </script>
+</body>
+</html>
